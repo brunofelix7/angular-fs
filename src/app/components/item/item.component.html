@@ -1,9 +1,10 @@
+<app-add-item></app-add-item>
 <div *ngIf="items?.length > 0;else noItems">
     <ul *ngFor="let item of items" class="collection">
         <li class="collection-item">
             <strong>{{item.title}}: </strong>
             {{item.description}}
-            <a href="#" class="secondary-content">
+            <a href="/items" class="secondary-content">
                 <i (click)="deleteItem($event, item)" class="fa fa-remove"></i>
                 <i (click)="editItem($event, item)" class="fa fa-pencil"></i>
             </a>
