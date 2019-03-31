@@ -14,44 +14,54 @@ export class AuthService {
 		this.myAuth.authState.subscribe(user => {
 			if (user) {
 				this.user = user;
-				localStorage.setItem('user', JSON.stringify(this.user));
-				this.router.navigate(['/items']);
+				localStorage.setItem('user_firebase', JSON.stringify(this.user));
 			} else {
-				localStorage.setItem('user', null);
+				localStorage.setItem('user_firebase', null);
 			}
 		})
 	}
 
-	isLoggedIn() {
-		return JSON.parse(localStorage.getItem('user')) !== null;
+	login(user: Auth) {
+		this.myAuth.auth.signInWithEmailAndPassword(user.email, user.password)
+			.then(response => {
+				this.router.navigate(['/items']);
+			}).catch(error => {
+				console.log('Something went wrong:', error.message);
+				return false;
+			});
+		return false;
 	}
 
-	async login(user: Auth) {
-		return await this.myAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+	signup(user: Auth) {
+		this.myAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
+			.then(response => {
+				console.log('Success!', response);
+			}).catch(error => {
+				console.log('Something went wrong:', error.message);
+			});
 	}
 
-	async loginWithGoogle(){
-		await this.myAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
+	logout() {
+		this.myAuth.auth.signOut();
+		localStorage.removeItem('user_firebase');
+		this.router.navigate(['/login']);
+	}
+
+	loginWithGoogle() {
+		this.myAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
 		this.router.navigate(['/items']);
 	}
 
-	async register(email: string, password: string) {
-		var result = await this.myAuth.auth.createUserWithEmailAndPassword(email, password)
+	isLoggedIn() {
+		return JSON.parse(localStorage.getItem('user_firebase')) !== null;
 	}
 
-	async sendEmailVerification() {
-		await this.myAuth.auth.currentUser.sendEmailVerification()
-		this.router.navigate(['/verify-email']);
+	sendEmailVerification() {
+		this.myAuth.auth.currentUser.sendEmailVerification()
 	}
 
-	async sendPasswordResetEmail(passwordResetEmail: string) {
-		return await this.myAuth.auth.sendPasswordResetEmail(passwordResetEmail);
-	}
-
-	async logout() {
-		await this.myAuth.auth.signOut();
-		localStorage.removeItem('user');
-		this.router.navigate(['/login']);
+	sendPasswordResetEmail(passwordResetEmail: string) {
+		this.myAuth.auth.sendPasswordResetEmail(passwordResetEmail);
 	}
 
 }

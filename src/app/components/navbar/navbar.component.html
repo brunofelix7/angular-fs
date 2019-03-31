@@ -1,5 +1,5 @@
 <nav>
-  <div class="nav-wrapper teal lighten-2">
-    <a href="/" class="brand-logo center">AngularFS - Item Manager</a>
+  <div class="nav-wrapper deep-purple darken-2">
+    <a [routerLink]="[ '/login/?logout=true']" (click)="authService.logout()" class="right">Logout</a>
   </div>
 </nav>

@@ -4,10 +4,10 @@
         <li class="collection-item">
             <strong>{{item.title}}: </strong>
             {{item.description}}
-            <a href="/items" class="secondary-content">
-                <i (click)="deleteItem($event, item)" class="fa fa-remove"></i>
-                <i (click)="editItem($event, item)" class="fa fa-pencil"></i>
-            </a>
+            <button type="button" class="secondary-content">
+                <i (click)="deleteItem($event, item)" class="fa fa-trash" style="color: #d32f2f; margin-right: 8px;"></i>
+                <i (click)="editItem($event, item)" class="fa fa-pencil" style="color: #7e57c2;"></i>
+            </button>
             <div *ngIf="editState && itemToEdit.id == item.id">
                 <form (ngSubmit)="updateItem(item)">
                     <div class="row">

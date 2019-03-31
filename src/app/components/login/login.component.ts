@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Auth } from '../../models/auth';
@@ -10,25 +11,23 @@ import { Auth } from '../../models/auth';
 export class LoginComponent implements OnInit {
 
 	user: Auth;
+	message: string;
 
-	constructor(private authService: AuthService) {
+	constructor(private authService: AuthService, private router: Router) {
 		this.user = new Auth();
-		this.user.email = 'brunofelix.dev@gmail.com';
-		this.user.password = '12345';
 	}
 
 	ngOnInit() {
-
+		if(this.authService.isLoggedIn()){
+			this.router.navigate(['/items']);
+		}
 	}
 
 	login() {
-		//	https://www.youtube.com/watch?v=6TRv1xT3Y-E
-		new Promise(
-			resolve => {
-				console.log(resolve.name);
-				this.authService.login(this.user);
-			}
-		);
+		this.message = '';
+		if(!this.authService.login(this.user)){
+			this.message = 'Email ou Senha inválidos';
+		}
 	}
 
 }

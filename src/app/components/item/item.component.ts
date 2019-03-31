@@ -1,6 +1,8 @@
-import { Item } from '../../models/Item';
 import { Component, OnInit } from '@angular/core';
+import { Item } from '../../models/Item';
 import { ItemService } from '../../services/item.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-items',
@@ -13,11 +15,15 @@ export class ItemComponent implements OnInit {
 	public itemToEdit: Item;
 	public editState: boolean;
 
-	constructor(private itemService: ItemService) {
+	constructor(private itemService: ItemService, private authService: AuthService, private router: Router) {
 		this.editState = false;
 	}
 
 	ngOnInit() {
+		if(!this.authService.isLoggedIn()){
+			this.router.navigate(['/login']);
+			return;
+		}
 		this.itemService.getItems().subscribe(itemsResponse => {
 			this.items = itemsResponse;
 		});

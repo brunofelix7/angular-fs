@@ -18,7 +18,6 @@ import { ItemComponent } from './components/item/item.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddItemComponent } from './components/add-item/add-item.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 
 /* Services */
 import { ItemService } from './services/item.service';
@@ -31,7 +30,6 @@ import { AuthService } from './services/auth.service';
 		NavbarComponent,
 		AddItemComponent,
 		LoginComponent,
-		RegisterComponent
 	],
 	imports: [
 		BrowserModule,

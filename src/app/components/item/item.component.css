@@ -2,3 +2,12 @@
     margin-right: 10px; 
     color:crimson;
 }
+
+.secondary-content {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}

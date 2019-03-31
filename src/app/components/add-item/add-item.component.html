@@ -1,17 +1,17 @@
-<div class="card">
+<div class="card" style="margin-top: 16px;">
     <div class="card-content">
-        <span class="card-title">Add Item</span>
+        <span class="card-title">Novo item</span>
         <form (ngSubmit)="onSubmit()" class="col s6">
             <div class="row">
                 <div class="input-field col s6">
-                    <input type="text" placeholder="Add title" [(ngModel)]="item.title" name="title"/>
-                    <label for="title">Title</label>
+                    <input type="text" [(ngModel)]="item.title" name="title" />
+                    <label for="title">Título</label>
                 </div>
                 <div class="input-field col s6">
-                    <input type="text" placeholder="Add description" [(ngModel)]="item.description" name="description"/>
-                    <label for="description">Description</label>
+                    <input type="text" [(ngModel)]="item.description" name="description" />
+                    <label for="description">Descrição</label>
                 </div>
-                <input type="submit" value="Add" class="btn" />
+                <input type="submit" value="Salvar" class="btn deep-purple darken-2" />
             </div>
         </form>
     </div>
